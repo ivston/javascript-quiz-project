@@ -24,7 +24,7 @@ class Quiz {
       const qIndex = Math.floor(Math.random() * this.questions.length);
       randomQ.push(this.questions.splice(qIndex, 1));
     }
-    return randomQ;
+    this.questions = randomQ;
   }
 
   checkAnswer(answer) {
@@ -33,10 +33,6 @@ class Quiz {
     }
   }
   hasEnded() {
-    if (this.currentQuestionIndex < this.questions.length) {
-      return false;
-    } else if (this.currentQuestionIndex === this.questions.length) {
-      return true;
-    }
+    return this.currentQuestionIndex === this.questions.length;
   }
 }
