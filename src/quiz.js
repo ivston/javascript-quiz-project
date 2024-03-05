@@ -39,7 +39,9 @@ class Quiz {
   filterQuestionsByDifficulty(difficulty) {
     if (difficulty >= 1 && difficulty <= 3) {
       //update questions array to contain only questions with specific difficulty
-      this.questions.filter((question) => question.difficulty === difficulty);
+      this.questions = this.questions.filter(
+        (question) => question.difficulty === difficulty
+      );
     }
   }
 
