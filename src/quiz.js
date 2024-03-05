@@ -39,4 +39,13 @@ class Quiz {
       return true;
     }
   }
+
+  filterQuestionsByDifficulty(difficulty) {
+    if (difficulty >= 1 && difficulty <= 3) {
+      //update questions array to contain only questions with specific difficulty
+      this.questions.filter((question) => question.difficulty === difficulty);
+    }
+  }
+
+  // averageDifficulty()
 }
