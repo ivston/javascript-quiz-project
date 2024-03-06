@@ -20,12 +20,7 @@ class Quiz {
   }
 
   shuffleQuestions() {
-    let randomQ = [];
-    while (this.questions.length > 0) {
-      const qIndex = Math.floor(Math.random() * this.questions.length);
-      randomQ.push(this.questions.splice(qIndex, 1));
-    }
-    this.questions = randomQ;
+    this.questions.sort(() => (Math.random() > 0.5 ? 1 : -1));
   }
 
   checkAnswer(answer) {
@@ -58,34 +53,3 @@ class Quiz {
     return result;
   }
 }
-
-// const questions = [
-//   {
-//     text: "Question 1",
-//     choices: ["a", "b", "c"],
-//     answer: "a",
-//     difficulty: 1,
-//   },
-//   {
-//     text: "Question 2",
-//     choices: ["d", "e", "f"],
-//     answer: "d",
-//     difficulty: 2,
-//   },
-//   {
-//     text: "Question 3",
-//     choices: ["g", "h", "i"],
-//     answer: "g",
-//     difficulty: 2,
-//   },
-//   {
-//     text: "Question 4",
-//     choices: ["j", "k", "l"],
-//     answer: "j",
-//     difficulty: 3,
-//   },
-// ];
-
-// const quiz = new Quiz(questions, 10, 8);
-// console.log(quiz.averageDifficulty());
-// // console.log(quiz.filterQuestionsByDifficulty(3));
