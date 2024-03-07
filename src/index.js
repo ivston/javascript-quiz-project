@@ -72,7 +72,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /************  TIMER  ************/
 
-  let timer;
+  let timer = null;
+  function startTimer() {
+    timer = setInterval(() => {
+      const minutes = Math.floor(quiz.timeRemaining / 60)
+        .toString()
+        .padStart(2, "0");
+      const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
+      timeRemainingContainer.innerText = `${minutes}:${seconds}`;
+      if (quiz.timeRemaining === 0) {
+        clearInterval(timer);
+        showResults();
+      }
+      quiz.timeRemaining--;
+      console.log(quiz.timeRemaining);
+    }, 1000);
+  }
+  startTimer();
 
   /************  EVENT LISTENERS  ************/
 
@@ -88,6 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function showQuestion() {
     // If the quiz has ended, show the results
     if (quiz.hasEnded()) {
+      clearInterval(timer);
+      quiz.timeRemaining = quizDuration;
       showResults();
       return;
     }
@@ -177,7 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (selectedAnswer == quiz.questions[quiz.currentQuestionIndex].answer) {
       quiz.checkAnswer(selectedAnswer);
     }
-    console.log(quiz.correctAnswers);
     // Move to the next question by calling the quiz method `moveToNextQuestion()`.
     quiz.moveToNextQuestion();
     // Show the next question by calling the function `showQuestion()`.
@@ -199,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function resetQuiz() {
+    startTimer();
     quizView.style.display = "block";
     endView.style.display = "none";
     quiz.correctAnswers = 0;
